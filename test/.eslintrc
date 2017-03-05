@@ -1,0 +1,7 @@
+{
+  "globals": {
+    "test": true,
+    "describe": true,
+    "expect": true
+  }
+}

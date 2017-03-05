@@ -1,0 +1,30 @@
+{
+  "name": "vat-siren-siret",
+  "version": "1.0.0",
+  "description": "Library to check or generate french VAT / SIRET / SIREN",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/jest/bin/jest.js --coverage"
+  },
+  "tags": [
+    "vat",
+    "siren",
+    "siret"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jbdemonte/vat-siren-siret.git"
+  },
+  "files": [
+    "index.js"
+  ],
+  "jest": {
+    "testRegex": "test/.*\\.js"
+  },
+  "author": "Jean-Baptiste Demonte <jbdemonte@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "coveralls": "^2.11.16",
+    "jest": "^19.0.2"
+  }
+}
