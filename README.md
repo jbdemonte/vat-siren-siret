@@ -2,7 +2,7 @@
 
 [![travis build](https://img.shields.io/travis/jbdemonte/vat-siren-siret.svg)](https://travis-ci.org/jbdemonte/vat-siren-siret)
 [![Coverage Status](https://coveralls.io/repos/github/jbdemonte/vat-siren-siret/badge.svg?branch=master)](https://coveralls.io/github/jbdemonte/vat-siren-siret?branch=master)
-[![](https://img.shields.io/npm/v/vat-siren-siret)](https://www.npmjs.com/package/vat-siren-siret)
+[![NPM Version](https://img.shields.io/npm/v/vat-siren-siret.svg)](https://www.npmjs.com/package/vat-siren-siret)
 
 This library allows to check french VAT, SIRET and SIREN and to generate VAT or SIREN from SIRET, SIREN and VAT.
 
