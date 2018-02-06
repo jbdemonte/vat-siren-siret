@@ -4,6 +4,9 @@ const re = {
   SIRET: /^\d{14}$/,
   SIREN: /^\d{9}$/,
   VAT: /^FR\d{11}$/,
+  formatSIRET: /^(\d{3})(\d{3})(\d{3})(\d{5})$/g,
+  formatSIREN: /(\d\d\d\B)/g,
+  formatVAT: /^([A-Z]{2})(\d{2})(\d{3})(\d{3})(\d{3})$/,
 };
 
 /**
@@ -112,10 +115,34 @@ function toVAT(value) {
   return `FR${key}${siren}`;
 }
 
+function formatSIRET(value) {
+  if (!isSIRET(value)) {
+    throw new Error('Not a valid SIRET');
+  }
+  return value.replace(re.formatSIRET, '$1 $2 $3 $4');
+}
+
+function formatSIREN(value) {
+  if (!isSIREN(value)) {
+    throw new Error('Not a valid SIREN');
+  }
+  return value.replace(re.formatSIREN, '$1 ');
+}
+
+function formatVAT(value) {
+  if (!isVAT(value)) {
+    throw new Error('Not a valid VAT number');
+  }
+  return value.replace(re.formatVAT, '$1 $2 $3 $4 $5');
+}
+
 module.exports = {
   isSIREN,
   isSIRET,
   isVAT,
   toSIREN,
   toVAT,
+  formatSIRET,
+  formatSIREN,
+  formatVAT,
 };
