@@ -16,6 +16,10 @@ test('SIREN to VAT', () => {
   expect(lib.toVAT('803417153')).toBe('FR30803417153');
 });
 
+test('SIREN to VAT having a single digit VAT key', () => {
+  expect(lib.toVAT('000894402')).toBe('FR04000894402');
+});
+
 test('VAT to VAT', () => {
   expect(lib.toVAT('FR42813454717')).toBe('FR42813454717');
   expect(lib.toVAT('FR30803417153')).toBe('FR30803417153');

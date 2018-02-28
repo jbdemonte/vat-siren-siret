@@ -112,7 +112,7 @@ function toVAT(value) {
     return false;
   }
   const key = getVATKey(siren);
-  return `FR${key}${siren}`;
+  return `FR${key < 10 ? '0' : ''}${key}${siren}`;
 }
 
 /**
