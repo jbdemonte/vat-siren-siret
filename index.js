@@ -115,23 +115,38 @@ function toVAT(value) {
   return `FR${key}${siren}`;
 }
 
+/**
+ * Format (prettify) a SIRET
+ * @param {string} value
+ * @return {string}
+ */
 function formatSIRET(value) {
   if (!isSIRET(value)) {
-    throw new Error('Not a valid SIRET');
+    return value;
   }
   return value.replace(re.formatSIRET, '$1 $2 $3 $4');
 }
 
+/**
+ * Format (prettify) a SIREN
+ * @param {string} value
+ * @return {string}
+ */
 function formatSIREN(value) {
   if (!isSIREN(value)) {
-    throw new Error('Not a valid SIREN');
+    return value;
   }
   return value.replace(re.formatSIREN, '$1 ');
 }
 
+/**
+ * Format (prettify) a VAT
+ * @param {string} value
+ * @return {string}
+ */
 function formatVAT(value) {
   if (!isVAT(value)) {
-    throw new Error('Not a valid VAT number');
+    return value;
   }
   return value.replace(re.formatVAT, '$1 $2 $3 $4 $5');
 }

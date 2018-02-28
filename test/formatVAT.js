@@ -1,9 +1,9 @@
 const lib = require('../index');
 
-[0, 1, true, false, {}, [], '813454717', 'FR4281345471', 'FR428134547171'].forEach((value) => {
-  test(`bad value ${JSON.stringify(value)}`, () => {
-    expect(() => lib.formatVAT(value)).toThrow('Not a valid VAT number');
-  });
+
+test('format VAT bad values', () => {
+  const badValues = [0, 1, true, false, {}, [], '813454717', 'FR4281345471', 'FR428134547171'];
+  expect(badValues.map(lib.formatVAT)).toEqual(badValues);
 });
 
 test(`format VAT good values`, () => {

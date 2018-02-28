@@ -7,29 +7,33 @@
 This library allows to check french VAT, SIRET and SIREN and to generate VAT or SIREN from SIRET, SIREN and VAT.
 
 ## Installation
+
 ```
 npm install vat-siren-siret --save
 ```
 
 ## Usage
+
 ```js
 const vss = require('vat-siren-siret');
 
 // Check string
-
-console.log( vss.isSIREN('813454717') );        // true
-console.log( vss.isSIRET('81345471700014') );   // true
-console.log( vss.isVAT('FR42813454717') );      // true
+console.log(vss.isSIREN('813454717')); // true
+console.log(vss.isSIRET('81345471700014')); // true
+console.log(vss.isVAT('FR42813454717')); // true
 
 // Generate french VAT
-console.log( vss.toVAT('813454717') );          // FR42813454717
-console.log( vss.toVAT('81345471700014') );     // FR42813454717
+console.log(vss.toVAT('813454717')); // FR42813454717
+console.log(vss.toVAT('81345471700014')); // FR42813454717
 
 // Generate SIREN
-console.log( vss.toSIREN('81345471700014') );   // 813454717
-console.log( vss.toSIREN('FR42813454717') );    // 813454717
+console.log(vss.toSIREN('81345471700014')); // 813454717
+console.log(vss.toSIREN('FR42813454717')); // 813454717
 
-
+// Format
+console.log(vss.formatSIREN('813454717')); // 813 454 717
+console.log(vss.formatSIRET('81345471700014')); // 813 454 717 00014
+console.log(vss.formatVAT('FR30803417153')); // FR 30 803 417 153
 ```
 
 ### isSIREN(value)
@@ -54,5 +58,18 @@ Return `value` if it already is a VAT.
 Generate the SIREN from a VAT or a SIRET and return a `string` or `false` as `boolean` when value is wrong.
 Return `value` if it already is a SIREN.
 
+## formatSIREN(value)
+
+If `value` is a valid SIREN, returns a properly formatted SIREN (eg. `552 100 554`). Otherwise, returns the value as is.
+
+## formatSIRET(value)
+
+If `value` is a valid SIRET, returns a properly formatted SIRET (eg. `732 829 320 00074`). Otherwise, returns the value as is.
+
+## formatVAT(value)
+
+If `value` is a valid VAT number, returns a properly formatted VAT number (eg. `FR 30 803 417 153`). Otherwise, returns the value as is.
+
 ## License
+
 [MIT](https://opensource.org/licenses/MIT)
