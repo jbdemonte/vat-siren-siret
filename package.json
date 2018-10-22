@@ -1,6 +1,6 @@
 {
   "name": "vat-siren-siret",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Library to check or generate french VAT / SIRET / SIREN",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "url": "git@github.com:jbdemonte/vat-siren-siret.git"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "jest": {
     "testRegex": "test/.*\\.js"
