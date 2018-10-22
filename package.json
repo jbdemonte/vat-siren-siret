@@ -1,6 +1,6 @@
 {
   "name": "vat-siren-siret",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Library to check or generate french VAT / SIRET / SIREN",
   "main": "index.js",
   "scripts": {
