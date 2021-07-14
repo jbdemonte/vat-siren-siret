@@ -1,5 +1,3 @@
-'use strict';
-
 const re = {
   SIRET: /^\d{14}$/,
   SIREN: /^\d{9}$/,
@@ -9,17 +7,15 @@ const re = {
   formatVAT: /^([A-Z]{2})(\d{2})(\d{3})(\d{3})(\d{3})$/,
 };
 
+
 /**
  * Return TRUE if the string evaluation on the Luhn algorithm succeeds
- * @param {string} value
- * @return {boolean}
  */
-function checkLuhn(value) {
-  let digit;
-  let i;
+function checkLuhn(value: string): boolean {
+  let digit: number;
   let sum = 0;
   let even = false;
-  for (i = value.length - 1; i >= 0; i -= 1) {
+  for (let i = value.length - 1; i >= 0; i -= 1) {
     digit = parseInt(value[i], 10);
     if (even) {
       digit += digit;
@@ -35,56 +31,44 @@ function checkLuhn(value) {
 
 /**
  * Return the french VAT key for a SIREN
- * @param {string} siren
- * @return {number}
  */
-function getVATKey(siren) {
+function getVATKey(siren: string): number {
   return (12 + (3 * (parseInt(siren, 10) % 97))) % 97;
 }
 
 /**
  * Return TRUE if the VAT is correct
- * @param {string} vat
- * @return {boolean}
  */
-function checkVAT(vat) {
+function checkVAT(vat: string): boolean {
   const siren = vat.substr(4);
   return getVATKey(siren) === parseInt(vat.substr(2, 2), 10) && checkLuhn(siren);
 }
 
 /**
  * Return TRUE if the SIREN is valid
- * @param {string} siren
- * @return {boolean}
  */
-function isSIREN(siren) {
-  return typeof siren === 'string' && re.SIREN.test(siren) && checkLuhn(siren);
+export function isSIREN(siren: string): boolean {
+  return re.SIREN.test(siren) && checkLuhn(siren);
 }
 
 /**
  * Return TRUE if the SIRET is valid
- * @param {string} siret
- * @return {boolean}
  */
-function isSIRET(siret) {
-  return typeof siret === 'string' && re.SIRET.test(siret) && checkLuhn(siret);
+export function isSIRET(siret: string): boolean {
+  return re.SIRET.test(siret) && checkLuhn(siret);
 }
 
 /**
  * Return TRUE if the VAT is valid
- * @param {string} vat
- * @return {boolean}
  */
-function isVAT(vat) {
-  return typeof vat === 'string' && re.VAT.test(vat) && checkVAT(vat);
+export function isVAT(vat: string): boolean {
+  return re.VAT.test(vat) && checkVAT(vat);
 }
 
 /**
  * Convert a SIREN / SIRET / VAT to a SIREN
- * @param {string} value
- * @return {string|boolean}
  */
-function toSIREN(value) {
+export function toSIREN(value: string): string {
   if (isSIRET(value)) {
     return value.substr(0, 9);
   }
@@ -94,33 +78,28 @@ function toSIREN(value) {
   if (isSIREN(value)) {
     return value;
   }
-  return false;
+  return '';
 }
 
 /**
  * Convert a SIREN / SIRET / VAT to a VAT
- * @param {string} value
- * @return {string|boolean}
  */
-function toVAT(value) {
-  let siren = value;
-  if (isSIRET(value)) {
-    siren = toSIREN(value);
-  } else if (isVAT(value)) {
-    return siren;
-  } else if (!isSIREN(value)) {
-    return false;
+export function toVAT(value: string): string {
+  if (isVAT(value)) {
+    return value;
   }
-  const key = getVATKey(siren);
-  return `FR${key < 10 ? '0' : ''}${key}${siren}`;
+  const siren = toSIREN(value);
+  if (siren) {
+    const key = getVATKey(siren);
+    return `FR${key < 10 ? '0' : ''}${key}${siren}`;
+  }
+  return '';
 }
 
 /**
  * Format (prettify) a SIRET
- * @param {string} value
- * @return {string}
  */
-function formatSIRET(value) {
+export function formatSIRET(value: string): string {
   if (!isSIRET(value)) {
     return value;
   }
@@ -129,10 +108,8 @@ function formatSIRET(value) {
 
 /**
  * Format (prettify) a SIREN
- * @param {string} value
- * @return {string}
  */
-function formatSIREN(value) {
+export function formatSIREN(value: string): string {
   if (!isSIREN(value)) {
     return value;
   }
@@ -141,23 +118,10 @@ function formatSIREN(value) {
 
 /**
  * Format (prettify) a VAT
- * @param {string} value
- * @return {string}
  */
-function formatVAT(value) {
+export function formatVAT(value: string): string {
   if (!isVAT(value)) {
     return value;
   }
   return value.replace(re.formatVAT, '$1 $2 $3 $4 $5');
 }
-
-module.exports = {
-  isSIREN,
-  isSIRET,
-  isVAT,
-  toSIREN,
-  toVAT,
-  formatSIRET,
-  formatSIREN,
-  formatVAT,
-};
