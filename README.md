@@ -15,25 +15,25 @@ npm install vat-siren-siret --save
 ## Usage
 
 ```js
-const vss = require('vat-siren-siret');
+import { isSIREN, isSIRET, isVAT, toVAT, toSIREN, formatSIREN, formatSIRET, formatVAT } from 'vat-siren-siret';
 
 // Check string
-console.log(vss.isSIREN('813454717')); // true
-console.log(vss.isSIRET('81345471700014')); // true
-console.log(vss.isVAT('FR42813454717')); // true
+isSIREN('889405619'); // true
+isSIRET('88940561900012'); // true
+isVAT('FR39889405619'); // true
 
 // Generate french VAT
-console.log(vss.toVAT('813454717')); // FR42813454717
-console.log(vss.toVAT('81345471700014')); // FR42813454717
+toVAT('889405619'); // 'FR39889405619'
+toVAT('88940561900012'); // 'FR39889405619'
 
 // Generate SIREN
-console.log(vss.toSIREN('81345471700014')); // 813454717
-console.log(vss.toSIREN('FR42813454717')); // 813454717
+toSIREN('88940561900012'); // '889405619'
+toSIREN('FR39889405619'); // '889405619'
 
 // Format
-console.log(vss.formatSIREN('813454717')); // 813 454 717
-console.log(vss.formatSIRET('81345471700014')); // 813 454 717 00014
-console.log(vss.formatVAT('FR30803417153')); // FR 30 803 417 153
+formatSIREN('889405619'); // '889 405 619'
+formatSIRET('88940561900012'); // '889 405 619 00012'
+formatVAT('FR39889405619'); // 'FR 39 889 405 619'
 ```
 
 ### isSIREN(value)
@@ -50,25 +50,24 @@ Evaluate if the `value` is a french VAT and return a `boolean`.
 
 ### toVAT(value)
 
-Generate the french VAT from a SIREN or a SIRET and return a `string` or `false` as `boolean` when value is wrong.
+Generate the french VAT from a SIREN or a SIRET and return a `string` or an empty string when the value is wrong.
 Return `value` if it already is a VAT.
 
 ### toSIREN(value)
 
-Generate the SIREN from a VAT or a SIRET and return a `string` or `false` as `boolean` when value is wrong.
-Return `value` if it already is a SIREN.
+Generate the SIREN from a VAT or a SIRET and return a `string` or an empty string when the value is wrong.
 
 ## formatSIREN(value)
 
-If `value` is a valid SIREN, returns a properly formatted SIREN (eg. `552 100 554`). Otherwise, returns the value as is.
+If `value` is a valid SIREN, returns a properly formatted SIREN (eg. `552 100 554`). Otherwise, returns the value.
 
 ## formatSIRET(value)
 
-If `value` is a valid SIRET, returns a properly formatted SIRET (eg. `732 829 320 00074`). Otherwise, returns the value as is.
+If `value` is a valid SIRET, returns a properly formatted SIRET (eg. `732 829 320 00074`). Otherwise, returns the value.
 
 ## formatVAT(value)
 
-If `value` is a valid VAT number, returns a properly formatted VAT number (eg. `FR 30 803 417 153`). Otherwise, returns the value as is.
+If `value` is a valid VAT number, returns a properly formatted VAT number (eg. `FR 30 803 417 153`). Otherwise, returns the value.
 
 ## License
 
