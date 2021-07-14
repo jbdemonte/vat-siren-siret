@@ -1,0 +1,12 @@
+coverage
+node_modules
+src
+.idea
+.gitignore
+.npmignore
+.DS_Store
+.travis.yml
+jest.json
+tsconfig.json
+yarn.lock
+*.log
